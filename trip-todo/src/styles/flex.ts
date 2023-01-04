@@ -12,12 +12,24 @@ type IJustifyContent =
   | 'space-evenly'
   | 'initial'
   | 'inherit';
-type IAlignItems = '' | 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'baseline' | 'initial' | 'inherit';
+type IAlignItems =
+  | ''
+  | 'stretch'
+  | 'center'
+  | 'flex-start'
+  | 'flex-end'
+  | 'baseline'
+  | 'initial'
+  | 'inherit';
 type IDirection = 'column' | 'row' | 'column-reverse';
 
 /** flex */
 
-export const flex = (justify: IJustifyContent, align: IAlignItems, direction: IDirection = 'row') => css`
+export const flex = (
+  justify: IJustifyContent,
+  align: IAlignItems,
+  direction: IDirection = 'row',
+) => css`
   display: flex;
   align-items: ${align};
   flex-direction: ${direction};
