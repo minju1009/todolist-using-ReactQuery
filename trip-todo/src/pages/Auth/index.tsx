@@ -1,14 +1,10 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-
 import Form from './components/Form';
 
 import { flex } from 'styles/flex';
-
 import { font } from 'styles/fonts';
 
 export default function Auth() {
-  const [mode, setMode] = useState('회원가입');
   return (
     <Wrapper>
       <LeftContainer>
@@ -17,7 +13,7 @@ export default function Auth() {
           <p>TripTodo</p>
         </LogoContainer>
         <FormContainer>
-          <Form mode={mode} />
+          <Form />
         </FormContainer>
       </LeftContainer>
       <RightContainer>
