@@ -14,7 +14,8 @@ const useLoginQuery = (setErrorText: Function) =>
     ({ email, password }: { email: string; password: string }) =>
       fetchLogin(email, password),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        localStorage.setItem('token', data.token);
         alert('로그인에 성공했습니다');
       },
       onError: (error: AxiosError) => {
