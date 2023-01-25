@@ -5,3 +5,8 @@ export interface ITodoList {
   createdAt: string;
   updatedAt: string;
 }
+export interface IUpdateTodo {
+  title: string;
+  content: string;
+  id: string;
+}

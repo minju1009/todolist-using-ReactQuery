@@ -11,15 +11,19 @@ import { font } from 'styles/fonts';
 import { flex } from 'styles/flex';
 import React, { useState } from 'react';
 
-export default function TodoList() {
-  const { data: todoList } = useGetTodosQuery();
-  const { mutate: createTodo } = useCreateTodoQuery();
+interface ITodoListProps {
+  handleSelectedId: (id: string) => void;
+}
 
+export default function TodoList({ handleSelectedId }: ITodoListProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newTodo, setNewTodo] = useState({
     title: '',
     content: '',
   });
+
+  const { data: todoList } = useGetTodosQuery();
+  const { mutate: createTodo } = useCreateTodoQuery();
 
   const { title, content } = newTodo;
 
@@ -63,7 +67,7 @@ export default function TodoList() {
         {todoList?.map(({ id, title }) => (
           <ListWrap key={id}>
             <Checkbox text={title} />
-            <DetailBtn>상세보기</DetailBtn>
+            <DetailBtn onClick={() => handleSelectedId(id)}>상세보기</DetailBtn>
           </ListWrap>
         ))}
         {isModalOpen && (
