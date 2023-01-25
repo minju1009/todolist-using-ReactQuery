@@ -7,7 +7,13 @@ import TodoList from './TodoList';
 
 const DAY_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];
 
-export default function TodoListContainer() {
+interface ITodoListContainerProps {
+  handleSelectedId: (id: string) => void;
+}
+
+export default function TodoListContainer({
+  handleSelectedId,
+}: ITodoListContainerProps) {
   const today = useRef(new Date());
   const title = `${
     today.current.getMonth() + 1
@@ -25,15 +31,15 @@ export default function TodoListContainer() {
         </div>
         <Counter>{todoList?.length}개의 할 일</Counter>
       </TitleWrap>
-      <TodoList />
+      <TodoList handleSelectedId={handleSelectedId} />
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 30%;
   padding: 40px;
   overflow: hidden;
+  width: 33vw;
 `;
 
 const TitleWrap = styled.div`
@@ -54,8 +60,4 @@ const SubTitle = styled.h3`
 const Counter = styled.div`
   ${font(14, 400, 16)}
   color: #c58940;
-`;
-
-const ListContainer = styled.div`
-  border: 1px solid #c58940;
 `;

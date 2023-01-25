@@ -40,6 +40,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledText = styled.p<{ isChecked: boolean }>`
+  line-height: 21px;
   margin-left: 10px;
   text-decoration: ${({ isChecked }) => isChecked && 'line-through'};
 `;
