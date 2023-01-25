@@ -11,7 +11,9 @@ const fetchTodos = async () => {
 
 const useGetTodosQuery = () =>
   useQuery<ITodoList[], AxiosError>(['todos', 'list'], fetchTodos, {
-    onSuccess: (data) => data,
+    select: (data) => {
+      return data.reverse();
+    },
     onError: (error) => {
       console.error(`getTodosError : ${error}`);
     },
