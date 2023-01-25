@@ -8,11 +8,12 @@ interface IInputPropTypes extends HTMLAttributes<HTMLInputElement> {
   autoFocus?: boolean;
   isError?: boolean;
   subText?: string;
-  title: string;
+  title?: string;
   type?: string;
   value?: string;
   name?: string;
   placeholder?: string;
+  backgroundColor?: string;
   onChangeInput: Function;
 }
 
@@ -26,6 +27,7 @@ function Input({
   onChangeInput,
   name,
   placeholder,
+  backgroundColor,
 }: IInputPropTypes) {
   return (
     <Container>
@@ -40,6 +42,7 @@ function Input({
           value={value}
           onChange={(e) => onChangeInput(e)}
           autoComplete="off"
+          backgroundColor={backgroundColor}
         />
         {isError && <InputSubText isError={isError}>{subText}</InputSubText>}
       </InputWrapper>
@@ -51,6 +54,7 @@ export default Input;
 
 interface IInputStyleProps extends HTMLAttributes<HTMLInputElement> {
   isError?: boolean;
+  backgroundColor?: string;
 }
 
 const Container = styled.div``;
@@ -75,6 +79,9 @@ const InputField = styled.input<IInputStyleProps>`
   width: 100%;
   padding: 15px;
   color: #c58940;
+  border-radius: 10px;
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor && backgroundColor};
 
   ${({ isError }) =>
     isError &&

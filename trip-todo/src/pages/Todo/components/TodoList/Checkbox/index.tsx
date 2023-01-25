@@ -14,13 +14,8 @@ export default function Checkbox({ text }: ICheckboxPropTypes) {
   };
 
   return (
-    <StyledLabel htmlFor={text}>
-      <StyledInput
-        type="checkbox"
-        id={text}
-        name={text}
-        onChange={handleCheckboxClick}
-      />
+    <StyledLabel>
+      <StyledInput type="checkbox" name={text} onChange={handleCheckboxClick} />
       <StyledText isChecked={isChecked}>{text}</StyledText>
     </StyledLabel>
   );
