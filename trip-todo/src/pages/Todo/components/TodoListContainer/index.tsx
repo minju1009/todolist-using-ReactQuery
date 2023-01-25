@@ -1,17 +1,20 @@
-import React, { useRef, useState } from 'react';
+import useGetTodosQuery from 'pages/Todo/queries/useGetTodosQuery';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { flex } from 'styles/flex';
 import { font } from 'styles/fonts';
-import TodoList from '../TodoList';
+import TodoList from './TodoList';
 
 const DAY_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];
 
 export default function TodoListContainer() {
-  const [today, setToday] = useState(new Date());
-  const title = `${today.getMonth() + 1}월 ${today.getDate()}일 ${
-    DAY_ARRAY[today.getDay()]
-  }요일`;
-  const year = today.getFullYear();
+  const today = useRef(new Date());
+  const title = `${
+    today.current.getMonth() + 1
+  }월 ${today.current.getDate()}일 ${DAY_ARRAY[today.current.getDay()]}요일`;
+  const year = today.current.getFullYear();
+
+  const { data: todoList } = useGetTodosQuery();
 
   return (
     <Container>
@@ -20,7 +23,7 @@ export default function TodoListContainer() {
           <Title>{title}</Title>
           <SubTitle>{year}</SubTitle>
         </div>
-        <Counter>개의 할 일</Counter>
+        <Counter>{todoList?.length}개의 할 일</Counter>
       </TitleWrap>
       <TodoList />
     </Container>

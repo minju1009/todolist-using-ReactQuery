@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Checkbox from 'pages/Todo/components/TodoList/Checkbox';
+import Checkbox from './Checkbox';
 import Modal from 'components/Modal';
 import Input from 'pages/Auth/components/Input';
 
@@ -57,48 +57,54 @@ export default function TodoList() {
   };
 
   return (
-    <TodoListWrap>
+    <div>
       <AddTodoBtn onClick={toggleModal}>할 일 추가하기</AddTodoBtn>
-      {todoList?.map(({ id, title }) => (
-        <ListWrap key={id}>
-          <Checkbox text={title} />
-          <DetailBtn>상세보기</DetailBtn>
-        </ListWrap>
-      ))}
-      {isModalOpen && (
-        <Modal>
-          <NewTodoModalContainer>
-            <Title>새로운 할 일</Title>
-            <Input
-              title="제목"
-              name="title"
-              onChangeInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleInput(e);
-              }}
-              placeholder="새롭게 할 일은 무엇인가요?"
-              backgroundColor="white"
-            />
-            <TextAreaTitle>세부내용</TextAreaTitle>
-            <Content
-              placeholder="내용을 입력해 주세요."
-              name="content"
-              autoComplete="off"
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                handleInput(e);
-              }}
-            />
-          </NewTodoModalContainer>
-          <ButtonContainer>
-            <ConfirmBtn onClick={handleConfirmBtnClick}>확인</ConfirmBtn>
-            <CancelBtn onClick={handleCancelBtnClick}>취소</CancelBtn>
-          </ButtonContainer>
-        </Modal>
-      )}
-    </TodoListWrap>
+      <TodoListWrap>
+        {todoList?.map(({ id, title }) => (
+          <ListWrap key={id}>
+            <Checkbox text={title} />
+            <DetailBtn>상세보기</DetailBtn>
+          </ListWrap>
+        ))}
+        {isModalOpen && (
+          <Modal>
+            <NewTodoModalContainer>
+              <Title>새로운 할 일</Title>
+              <Input
+                title="제목"
+                name="title"
+                onChangeInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleInput(e);
+                }}
+                placeholder="새롭게 할 일은 무엇인가요?"
+                backgroundColor="white"
+              />
+              <TextAreaTitle>세부내용</TextAreaTitle>
+              <Content
+                placeholder="내용을 입력해 주세요."
+                name="content"
+                autoComplete="off"
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  handleInput(e);
+                }}
+              />
+            </NewTodoModalContainer>
+            <ButtonContainer>
+              <ConfirmBtn onClick={handleConfirmBtnClick}>확인</ConfirmBtn>
+              <CancelBtn onClick={handleCancelBtnClick}>취소</CancelBtn>
+            </ButtonContainer>
+          </Modal>
+        )}
+      </TodoListWrap>
+    </div>
   );
 }
 
-const TodoListWrap = styled.div``;
+const TodoListWrap = styled.div`
+  padding: 10px;
+  height: 60vh;
+  overflow-y: auto;
+`;
 
 const AddTodoBtn = styled.button`
   margin-bottom: 10px;
@@ -110,7 +116,7 @@ const AddTodoBtn = styled.button`
 
 const ListWrap = styled.div`
   ${flex('space-between', 'center')}
-  margin-top: 10px;
+  margin-top: 15px;
 `;
 
 const DetailBtn = styled.button`
